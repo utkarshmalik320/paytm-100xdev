@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); 
 
-mongoose.connect("mongodb+srv://utkarshmalik320:@Jaimatadi07@paytm-database.orrdb6x.mongodb.net/?retryWrites=true&w=majority&appName=paytm-database");
+mongoose.connect(process.env.DATABASE_URL);
 
 const userSchema = mongoose.Schema({
     username :{
@@ -31,7 +32,21 @@ const userSchema = mongoose.Schema({
     }
 })
 
+const accountSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId, // Reference to User model
+        ref: 'User',
+        required: true
+    },
+    balance: {
+        type: Number,
+        required: true
+    }
+});
+
+const Account = mongoose.model('Account', accountSchema);
 const User = mongoose.model('User', userSchema);
 module.exports = {
-    User
+    User,
+    Account,
 };
