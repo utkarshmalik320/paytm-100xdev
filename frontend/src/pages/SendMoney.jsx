@@ -42,7 +42,7 @@ const SendMoney = () => {
                     />
                     </div>
                     <button onClick={() => {
-                        axios.post("http://localhost:4000/api/v1/account/transfer", {
+                        axios.post("http://localhost:4000/api/v1/account/transfer", {   // Api endpoint not supporting
                             to: id,
                             amount
                         }, {
